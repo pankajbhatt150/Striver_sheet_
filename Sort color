@@ -1,0 +1,26 @@
+  void swap(int j, int k, vector& nums){
+        int temp=nums[j];
+        nums[j]=nums[k];
+        nums[k]=temp;
+        return;
+    }
+public:
+    void sortColors(vector& nums) {
+        int i,j,k;                  //i,j,k = next postition of 0,1,2 respectively
+        i=0,j=0,k=nums.size()-1;
+        while(j<=k){                // (<=) is used because of cases like [2,0,1]
+            if(nums[j]==0){         
+                swap(i,j,nums);     // We put 0 in correct position
+                i++;                // i++ & j++ both because neither 0 nor 1 can
+                j++;                // take this index now
+            }
+            else if(nums[j]==1){
+                j++;                // only j++ coz 1 can't but 0 might take this
+            }                       // index later
+            else{
+                swap(j,k,nums);
+                k--;                // neither 0 nor 1 can take this index later
+            }
+        }
+    }
+};
