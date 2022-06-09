@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int index1 = -1, index2 = -1;
+        // find the break point in the array
+        for(int i = nums.size()-1; i > 0; i--) 
+        {
+            if(nums[i] > nums[i-1]) 
+            {
+                index1 = i-1;
+                break;
+            }
+        }
+        // find the next big element of the array by triversing form the back or if array doesn't have the break point i.e array is reverse sorted than don't change it
+        if(index1 != -1) 
+        {
+            for(int i = nums.size()-1; i > 0; i--) 
+            {
+                if(nums[i] > nums[index1]) 
+                {
+                    index2 = i;
+                    break;
+                }
+            }
+            // swap the break point with the bigger element 
+            swap(nums[index1], nums[index2]);
+        }
+        // reverse the array from the break point
+        reverse(nums.begin()+index1+1, nums.end());
+        return;
+    }
+};
